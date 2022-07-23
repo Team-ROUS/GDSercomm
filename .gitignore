@@ -1,0 +1,7 @@
+venv
+bin
+lib
+godot_headers/
+sercomm/
+*.o
+.sconsign.dblite
