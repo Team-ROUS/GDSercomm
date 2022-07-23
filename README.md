@@ -28,15 +28,12 @@ Available functions:
 
 You can get extra info of a function using `get_documentation(function_name)` if you have a godot editor with *nativescript1.1* support.
 
-**Building with scons:**
+**Building (Mac OS only):**
 
-You first need to add the dependencies to the main folder.
-By default it will require a folder named "godot_headers" and a folder named "sercomm"
-Add a compiled sercomm shared library (.dll , .so, .dylib) to the "lib" folder
-Use the following command:
+Run:
 
-```sh
-scons p=platform
+```
+make
 ```
 
-Note: At the moment on linux you need to copy the libsercomm.so to /usr/lib/ and run `ldconfig`
+The result library will be built to `bin/libGDSercomm.dylib`
