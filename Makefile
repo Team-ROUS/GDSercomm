@@ -1,7 +1,11 @@
 all: bin/libGDSercomm.dylib
 
-godot_headers: 
-	git clone --depth=1 -b 3.x git@github.com:GodotNativeTools/godot_headers.git
+godot_headers.zip:
+	curl -Lo godot_headers.zip https://github.com/GodotNativeTools/godot_headers/archive/refs/heads/3.x.zip
+
+godot_headers: godot_headers.zip
+	unzip godot_headers.zip
+	mv godot-headers-3.x godot_headers
 
 sercomm.zip:
 	curl -Lo sercomm.zip https://github.com/ingeniamc/sercomm/archive/refs/heads/master.zip
@@ -26,5 +30,6 @@ bin/libGDSercomm.dylib: lib/libsercomm.a venv
 
 clean:
 	rm -rf sercomm.zip sercomm
-	rm -rf godot_headers lib/libsercomm.a bin/libGDSercomm.dylib
+	rm -rf godot_headers.zip godot_headers
+	rm -rf lib/libsercomm.a bin/libGDSercomm.dylib
 	rm -rf venv
