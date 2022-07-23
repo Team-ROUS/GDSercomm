@@ -3,8 +3,12 @@ all: bin/libGDSercomm.dylib
 godot_headers: 
 	git clone --depth=1 -b 3.x git@github.com:GodotNativeTools/godot_headers.git
 
-sercomm: 
-	git clone --depth=1 git@github.com:ingeniamc/sercomm.git
+sercomm.zip:
+	curl -Lo sercomm.zip https://github.com/ingeniamc/sercomm/archive/refs/heads/master.zip
+
+sercomm: sercomm.zip
+	unzip sercomm.zip
+	mv sercomm-master sercomm
 
 lib/libsercomm.a: godot_headers sercomm
 	cd sercomm/ && cmake -H. -Bbuild -DBUILD_SHARED_LIBS=0
@@ -21,5 +25,6 @@ bin/libGDSercomm.dylib: lib/libsercomm.a venv
 	source venv/bin/activate && scons p=osx
 
 clean:
-	rm -rf godot_headers sercomm lib/libsercomm.a bin/libGDSercomm.dylib
+	rm -rf sercomm.zip sercomm
+	rm -rf godot_headers lib/libsercomm.a bin/libGDSercomm.dylib
 	rm -rf venv
