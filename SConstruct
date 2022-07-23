@@ -27,8 +27,8 @@ def add_sources(sources, directory):
             sources.append(directory + '/' + file)
 
 if platform == "osx":
-    env.Append(CCFLAGS = ['-g','-O3', '-arch', 'x86_64'])
-    env.Append(LINKFLAGS = ['-arch', 'x86_64'])
+    env.Append(CCFLAGS = ['-g','-O3', '-arch', 'arm64'])
+    env.Append(LINKFLAGS = ['-arch', 'arm64'])
 
 if platform == "linux":
     env.Append(CCFLAGS = ['-fPIC', '-g','-O3', '-std=c99','-Wall'])
@@ -45,6 +45,8 @@ env.Append(CPPPATH=['.', godot_headers_path , sercomm_header_path, libraries])
 
 sources = []
 add_sources(sources, "src")
+
+env.AppendUnique(FRAMEWORKS=Split('Foundation IOKit'))
 
 env.Append(LIBS = ['sercomm'])
 env.Append(LIBPATH = [libraries])
